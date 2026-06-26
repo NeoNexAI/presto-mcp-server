@@ -1,0 +1,38 @@
+[project]
+name = "presto-mcp-server"
+version = "2.0.0"
+description = "MCP server para Presto (RIB) — automatizacion COM local (Presto.App.25) + BC3 (FIEBDC-3). NeoNexAI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "NeoNexAI Agency" }]
+keywords = ["mcp", "model-context-protocol", "presto", "rib", "presupuestos", "bc3", "fiebdc", "neonexai"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Intended Audience :: Developers",
+]
+
+dependencies = [
+    "mcp>=1.2.0",
+    # pywin32 solo es necesario para la via COM (Windows). En otras plataformas
+    # el paquete sigue instalando y la parte BC3 funciona; las tools COM avisan.
+    "pywin32>=306; sys_platform == 'win32'",
+]
+
+[project.scripts]
+presto-mcp = "presto_mcp.server:main"
+presto-mcp-server = "presto_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/NeoNexAI/presto-mcp-server"
+Issues = "https://github.com/NeoNexAI/presto-mcp-server/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/presto_mcp"]
